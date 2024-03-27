@@ -5,7 +5,7 @@ export default class SearchBar extends React.Component {
 
     constructor() {
         super();
-        this.state = { searchedResult: [] };
+        this.state = { searchedResult: null, didSearch: false };
 
         // This binding is necessary to make `this` work in the callback
         this.search = this.search.bind(this);
@@ -53,15 +53,31 @@ export default class SearchBar extends React.Component {
         var collectedResult = [];
         for (var cursor = 0; cursor < countries.length; cursor++) {
             if (countries[cursor].name.search(regex) > -1) {
-                collectedResult.push(<p>{countries[cursor].name} | {countries[cursor].continent}</p>);
+                collectedResult.push(<tr><td>{countries[cursor].name}</td><td>{countries[cursor].continent}</td></tr>);
             }
         }
         console.log("## " + collectedResult.length);
 
-        this.setState({ searchedResult: collectedResult });
+        this.setState({ searchedResult: collectedResult, didSearch: true });
     }
 
     render() {
+
+        var result;
+        if (this.state.didSearch) {
+            if (this.state.searchedResult.length > 0) {
+                result = <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Continent</th>
+                            </tr>
+                            {this.state.searchedResult}
+                        </table>;
+            } else {
+                result = "NO DATA FOUND !!!";
+            }
+        }
+
         return (
             <div>
                 <div class="search-box">
@@ -70,7 +86,7 @@ export default class SearchBar extends React.Component {
                 </div>
 
                 <div id="search-result" class="search-result">
-                    {this.state.searchedResult.length > 0 ? this.state.searchedResult : "NO DATA FOUND !!!"}
+                    {result}
                 </div>
             </div>
         );
