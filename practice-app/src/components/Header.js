@@ -1,12 +1,12 @@
 import React from 'react';
+import Logo from '../assets/logo.jpg';
 
-// TODO: add logo here
 export default class Header extends React.Component {
 
     render() {
         return (
             <header>
-                <div class="logo">Logo goes here</div>
+                <img class="logo" src={Logo} alt="Logo" />
             </header>
         );
     }
