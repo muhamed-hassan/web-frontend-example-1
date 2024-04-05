@@ -1,6 +1,5 @@
 import React from 'react';
 
-// TODO: add table in JSX generation instead of simple-formatted records besides enhancing NO-DATA msg
 export default class SearchBar extends React.Component {
 
     constructor() {
